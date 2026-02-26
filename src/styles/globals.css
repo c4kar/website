@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Geist Fonts ─── */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Base ─── */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  font-size: clamp(13px, 1.1vw, 16px);
+}
+
+body {
+  @apply bg-neutral-bg1 text-text-primary font-mono antialiased;
+  min-height: 100vh;
+}
+
+/* ─── Dot-matrix dither (breathing) ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 4px 4px;
+  animation: ditherBreathe 8s ease-in-out infinite;
+}
+
+/* ─── Focus ─── */
+*:focus-visible {
+  @apply outline-none ring-1 ring-terminal-green;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { @apply bg-neutral-bg1; }
+::-webkit-scrollbar-thumb { @apply bg-neutral-bg5; }
+
+/* ─── Selection ─── */
+::selection {
+  @apply bg-terminal-green/20 text-terminal-green;
+}
+
+/* ─── Section divider ─── */
+@layer components {
+  .section-rule {
+    @apply font-mono text-xs text-text-muted flex items-center gap-3 mb-4 mt-8 uppercase tracking-widest select-none;
+  }
+  .section-rule::before {
+    content: '──';
+    @apply text-text-muted;
+  }
+  .section-rule::after {
+    content: '';
+    @apply flex-1 border-t border-border-subtle;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0s;
+  }
+  .section-rule.in-view::after {
+    animation: ruleSweep 0.6s ease-out forwards;
+  }
+}
+
+/* ─── Terminal cursor ─── */
+@layer components {
+  .cursor-blink::after {
+    content: '█';
+    @apply text-terminal-green animate-blink;
+  }
+}
+
+/* ─── Status dots ─── */
+@layer components {
+  .dot { @apply inline-block w-1.5 h-1.5 mr-1.5; }
+  .dot-run {
+    @apply bg-terminal-green;
+    color: #4ade80;
+    animation: dotPulse 2.5s ease-in-out infinite;
+  }
+  .dot-idle { @apply bg-terminal-amber; }
+  .dot-off { @apply bg-text-muted; }
+}
+
+/* ─── Data table ─── */
+@layer components {
+  .dtable {
+    @apply w-full font-mono text-sm border-collapse;
+  }
+  .dtable thead {
+    @apply border-b border-border-strong;
+  }
+  .dtable th {
+    @apply text-left text-text-muted text-xs uppercase tracking-widest py-2 px-3 font-normal;
+  }
+  .dtable td {
+    @apply py-2.5 px-3 text-text-secondary border-b border-border-subtle;
+  }
+  .dtable tbody tr:hover {
+    @apply bg-white/[0.02];
+  }
+  .dtable .cell-id {
+    @apply text-text-muted text-xs;
+  }
+  .dtable .cell-name {
+    @apply text-text-primary font-medium;
+  }
+  .dtable .cell-tag {
+    @apply text-terminal-cyan text-xs;
+  }
+}
+
+/* ─── Box panel ─── */
+@layer components {
+  .panel {
+    @apply border border-border bg-neutral-bg2 p-4 relative overflow-hidden;
+    transition: border-color 0.2s ease;
+  }
+  .panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(74, 222, 128, 0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .panel:hover {
+    @apply border-terminal-green/20;
+  }
+  .panel:hover::after {
+    opacity: 1;
+  }
+  .panel-header {
+    @apply text-xs text-text-muted uppercase tracking-widest mb-3 pb-2 border-b border-border-subtle relative z-10;
+  }
+}
+
+/* ─── Markdown / Blog prose ─── */
+@layer components {
+  .prose-terminal h1 {
+    @apply text-2xl font-bold text-terminal-green font-mono mb-4 mt-8;
+  }
+  .prose-terminal h2 {
+    @apply text-xl font-bold text-terminal-amber font-mono mb-3 mt-8;
+  }
+  .prose-terminal h3 {
+    @apply text-lg font-bold text-terminal-dim-green font-mono mb-2 mt-6;
+  }
+  .prose-terminal p {
+    @apply text-text-secondary leading-relaxed mb-4;
+  }
+  .prose-terminal a {
+    @apply text-terminal-cyan underline hover:text-terminal-green;
+  }
+  .prose-terminal ul {
+    @apply space-y-1 mb-4;
+  }
+  .prose-terminal li {
+    @apply text-text-secondary relative pl-5;
+  }
+  .prose-terminal li::before {
+    content: '├─';
+    @apply absolute left-0 text-text-muted text-xs;
+  }
+  .prose-terminal li:last-child::before {
+    content: '└─';
+  }
+  .prose-terminal code {
+    @apply font-mono text-terminal-green bg-neutral-bg3 px-1.5 py-0.5 text-sm border border-border-subtle;
+  }
+  .prose-terminal pre {
+    @apply bg-neutral-bg2 border border-border p-4 mb-4 overflow-x-auto;
+  }
+  .prose-terminal pre code {
+    @apply bg-transparent p-0 border-0;
+  }
+  .prose-terminal blockquote {
+    @apply border-l-2 border-terminal-amber pl-4 text-text-muted mb-4;
+  }
+}
