@@ -1,6 +1,8 @@
 // ─── Portfolio Data ───
 // Replace placeholder content with your own
 
+import React from 'react';
+
 export interface Project {
   id: string;
   title: string;
@@ -20,7 +22,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
-  content: string;
+  content: React.ComponentType; // MDX component
   date: string;
   tags: string[];
   readTime: string;
@@ -39,6 +41,13 @@ export interface Skill {
   projects: { title: string; url?: string }[];
 }
 
+export interface FavoriteTool {
+  name: string;
+  category: 'SYSTEM' | 'EDITOR' | 'BROWSER' | 'UTILITY' | 'TERMINAL';
+  description?: string;
+  url?: string;
+}
+
 export const NAV_ITEMS: NavItem[] = [
   { label: 'HOME', path: '/', index: 0 },
   { label: 'PROJECTS', path: '/projects', index: 1 },
@@ -48,53 +57,33 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const STATS = {
-  uptime: '3+ yrs',
+  uptime: '3+ years',
   projects: '7',
-  commits: '2.4k+',
   status: 'AVAILABLE',
-  os: 'Linux',
-  editor: 'Neovim',
+  os: 'linux-cachyos',
+  editor: 'nvim',
   shell: 'bash',
-  lang: 'prompt ¯\\_(ツ)_/¯',
+  lang: 'just prompt nowadays ¯\\_(ツ)_/¯',
 } as const;
 
 export const SITE_CONFIG = {
   name: 'Yusuf Çakar',
   title: 'Software Engineer',
   tagline: 'Building systems that work.',
-  email: 'yc4kar@gmail.com',
+  email: 'cakarr@proton.me',
   github: 'https://github.com/c4kar',
   linkedin: 'https://linkedin.com/in/c4kar',
   //twitter: 'https://twitter.com/vakarbarbar',
-  location: 'Earth',
+  location: 'Earth, Solar System',
   bio: `"Engineer hoping to contribute to a better world | Professional bug creator & solver 🐞🐛🦋`,
   skills: [
     {
       name: 'TypeScript',
       tag: 'DAILY DRIVER',
-      years: 3,
+      years: 1,
       projects: [
-        { title: 'Dashboard', url: 'https://github.com/yourusername/dashboard' },
-        { title: 'Portfolio', url: 'https://github.com/yourusername/portfolio' },
-        { title: 'Static Site Generator', url: 'https://github.com/yourusername/ssg' },
-      ],
-    },
-    {
-      name: 'React',
-      tag: 'DAILY DRIVER',
-      years: 3,
-      projects: [
-        { title: 'Dashboard', url: 'https://github.com/yourusername/dashboard' },
-        { title: 'Portfolio', url: 'https://github.com/yourusername/portfolio' },
-      ],
-    },
-    {
-      name: 'Node.js',
-      tag: 'PRODUCTION',
-      years: 3,
-      projects: [
-        { title: 'API Gateway', url: 'https://github.com/yourusername/api-gateway' },
-        { title: 'Task Queue', url: 'https://github.com/yourusername/task-queue' },
+        { title: 'Note Web', url: 'https://github.com/c4kar/ktunot' },
+        { title: 'Portfolio', url: 'https://github.com/c4kar/portfoiloWebsite' },
       ],
     },
     {
@@ -102,32 +91,7 @@ export const SITE_CONFIG = {
       tag: 'PRODUCTION',
       years: 3,
       projects: [
-        { title: 'Task Queue', url: 'https://github.com/yourusername/task-queue' },
-      ],
-    },
-    {
-      name: 'Go',
-      tag: 'PRODUCTION',
-      years: 2,
-      projects: [
-        { title: 'API Gateway', url: 'https://github.com/yourusername/api-gateway' },
-      ],
-    },
-    {
-      name: 'PostgreSQL',
-      tag: 'PRODUCTION',
-      years: 3,
-      projects: [
-        { title: 'Dashboard', url: 'https://github.com/yourusername/dashboard' },
-      ],
-    },
-    {
-      name: 'Docker',
-      tag: 'PRODUCTION',
-      years: 3,
-      projects: [
-        { title: 'API Gateway', url: 'https://github.com/yourusername/api-gateway' },
-        { title: 'Task Queue', url: 'https://github.com/yourusername/task-queue' },
+        { title: 'Projects' },
       ],
     },
     {
@@ -147,31 +111,6 @@ export const SITE_CONFIG = {
       ],
     },
     {
-      name: 'Rust',
-      tag: 'LEARNING',
-      years: 1,
-      projects: [
-        { title: 'Cloud CLI', url: 'https://github.com/yourusername/cloud-cli' },
-      ],
-    },
-    {
-      name: 'Next.js',
-      tag: 'PRODUCTION',
-      years: 2,
-      projects: [
-        { title: 'Portfolio', url: 'https://github.com/yourusername/portfolio' },
-      ],
-    },
-    {
-      name: 'Redis',
-      tag: 'PRODUCTION',
-      years: 2,
-      projects: [
-        { title: 'API Gateway', url: 'https://github.com/yourusername/api-gateway' },
-        { title: 'Task Queue', url: 'https://github.com/yourusername/task-queue' },
-      ],
-    },
-    {
       name: 'Neovim',
       tag: 'DAILY DRIVER',
       years: 3,
@@ -180,41 +119,112 @@ export const SITE_CONFIG = {
       ],
     },
     {
-      name: 'Tailwind',
-      tag: 'DAILY DRIVER',
-      years: 2,
+      name: 'Tpyst',
+      tag: 'HOBBYIST',
+      years: 1,
       projects: [
-        { title: 'Portfolio', url: 'https://github.com/yourusername/portfolio' },
-        { title: 'Dashboard', url: 'https://github.com/yourusername/dashboard' },
+        { title: 'Hobby projects' },
       ],
     },
     {
-      name: 'Figma',
-      tag: 'HOBBYIST',
-      years: 2,
+      name: 'Rust',
+      tag: 'LEARNING',
+      years: 1,
       projects: [
-        { title: 'UI prototypes' },
+        { title: 'Exploring' },
+      ],
+    },
+    {
+      name: 'Dart',
+      tag: 'LEARNING',
+      years: 1,
+      projects: [
+        { title: 'Learning' },
+      ],
+    },
+    {
+      name: 'Flutter',
+      tag: 'LEARNING',
+      years: 1,
+      projects: [
+        { title: 'Mobile learning' },
       ],
     },
   ] as Skill[],
+  favoriteTools: [
+    {
+      name: 'Opencode',
+      category: 'UTILITY',
+      description: 'AI coding assistant - supercharged development workflow',
+      url: 'https://opencode.ai',
+    },
+    {
+      name: 'CachyOS',
+      category: 'SYSTEM',
+      description: 'Arch linux-based distro optimized for performance and gaming',
+      url: 'https://cachyos.org/',
+    },
+    {
+      name: 'DankMaterialShell',
+      category: 'SYSTEM',
+      description: 'Best DE i ever used',
+      url: 'https://danklinux.com/',
+    },
+    {
+      name: 'Niri WM',
+      category: 'SYSTEM',
+      description: 'Scrollable-tiling Wayland compositor',
+      url: 'https://github.com/YaLTeR/niri',
+    },
+    {
+      name: 'Neovim',
+      category: 'EDITOR',
+      description: 'Highly configurable text editor built on Vim',
+      url: 'https://neovim.io',
+    },
+    {
+      name: 'Vivaldi',
+      category: 'BROWSER',
+      description: 'Powerful, feature-rich browser with deep customization',
+      url: 'https://vivaldi.com',
+    },
+    {
+      name: 'Yazi',
+      category: 'TERMINAL',
+      description: 'Blazing fast terminal file manager written in Rust, based on async I/O',
+      url: 'https://github.com/sxyazi/yazi',
+    },
+    {
+      name: 'Ghostty',
+      category: 'TERMINAL',
+      description: 'Fuzzy finder for command line',
+      url: 'https://github.com/junegunn/fzf',
+    },
+  ] as FavoriteTool[],
   experience: [
     {
-      role: 'Senior Software Engineer',
-      company: 'Company Name',
-      period: '2023 – Present',
-      description: 'Building scalable distributed systems and developer tools.',
+      role: 'Mobile & Frontend Developer Intern',
+      company: 'aivisiontech',
+      period: '2025 – 2026',
+      description: 'Developed Hikmicro mobile app SDK in Kotlin, built RAG-based AI search platform for scouts, and researched thermal camera applications in health and training analysis.',
     },
     {
-      role: 'Software Engineer',
-      company: 'Previous Co',
-      period: '2021 – 2023',
-      description: 'Full-stack web development with React and Node.js.',
+      role: 'Delivery Assistant (Komi)',
+      company: '40 İkindi Akyokuş',
+      period: '2025',
+      description: 'Managed food delivery services and customer hospitality operations.',
     },
     {
-      role: 'Junior Developer',
-      company: 'Startup Inc',
-      period: '2019 – 2021',
-      description: 'Built MVPs and shipped features across the stack.',
+      role: 'Waiter',
+      company: 'Kubbealtı Tiritcisi',
+      period: '2024',
+      description: 'Provided customer service and food service operations.',
+    },
+    {
+      role: 'Freelancer - 3D Designer & Developer',
+      company: 'Fiverr & Bionluk',
+      period: '2020 – 2023',
+      description: 'Specialized in 3D modeling, animations, architectural visualization, and texturing in Blender. Contributed to game development (MağaraJAM 2023 action game), aircraft simulator runway design for US-based startup, and NFT-based MMORPG asset creation.',
     },
   ],
 };
@@ -222,230 +232,85 @@ export const SITE_CONFIG = {
 export const PROJECTS: Project[] = [
   {
     id: 'PID-001',
-    title: 'Cloud Infrastructure CLI',
-    description: 'Developer-friendly CLI for managing cloud infra with declarative configs.',
-    longDescription: `Built a CLI tool that simplifies cloud infrastructure management.
-Uses declarative YAML configurations, supports multiple cloud providers,
-and includes a dry-run mode for safe deployments.`,
-    tech: ['Rust', 'AWS SDK', 'YAML', 'CI/CD'],
-    github: 'https://github.com/yourusername/cloud-cli',
-    live: 'https://docs.cloud-cli.dev',
+    title: 'KTÜN Note Network',
+    description: 'Digital garden for KTÜN university course notes with search and backlinks.',
+    longDescription: `A static site built with Quartz that serves as a knowledge base
+for university course notes. Features full-text search, graph visualization,
+and automatic backlink generation for connected learning.`,
+    tech: ['TypeScript', 'Node.js', 'Quartz', 'Markdown', 'React', 'Preact'],
+    github: 'https://github.com/c4kar/ktunot',
+    live: 'https://ktunot.net.tr',
     featured: true,
-    year: '2024',
-    status: 'RUNNING',
-  },
-  {
-    id: 'PID-002',
-    title: 'Real-time Dashboard',
-    description: 'WebSocket-powered monitoring dashboard with live metrics and alerting.',
-    longDescription: `A real-time monitoring dashboard built with React and WebSockets.
-Features live metric streaming, customizable alert thresholds,
-and historical data visualization with D3.js.`,
-    tech: ['React', 'TypeScript', 'WebSocket', 'D3.js', 'PostgreSQL'],
-    github: 'https://github.com/yourusername/dashboard',
-    live: 'https://dashboard-demo.vercel.app',
-    featured: true,
-    year: '2024',
+    year: '2025',
     status: 'RUNNING',
   },
   {
     id: 'PID-003',
-    title: 'API Gateway',
-    description: 'High-performance API gateway with rate limiting, auth, and transforms.',
-    longDescription: `An API gateway that handles authentication, rate limiting,
-and request/response transformation. Built for high throughput
-with connection pooling and circuit breaker patterns.`,
-    tech: ['Go', 'Redis', 'Docker', 'Prometheus'],
-    github: 'https://github.com/yourusername/api-gateway',
+    title: 'KTÜN Student Bot',
+    description: 'Telegram bot providing class schedules, announcements, and cafeteria menus.',
+    longDescription: `A Flask-based Telegram bot that serves KTÜN university students with
+automated announcements, class schedules, academic calendar, and daily
+cafeteria menus with PDF parsing capabilities.`,
+    tech: ['Python', 'Telegram Bot API', 'Flask', 'PyMuPDF'],
+    github: 'https://github.com/c4kar/ktunBot',
     featured: true,
-    year: '2023',
+    year: '2026',
     status: 'RUNNING',
   },
   {
     id: 'PID-004',
-    title: 'Static Site Generator',
-    description: 'Markdown-based SSG with hot reload and plugin system.',
-    longDescription: `A fast static site generator that converts Markdown to HTML
-with support for custom themes, plugins, and incremental builds.`,
-    tech: ['TypeScript', 'Node.js', 'Markdown', 'Vite'],
-    github: 'https://github.com/yourusername/ssg',
+    title: 'KTÜN Course Repository',
+    description: 'AI-powered quality control system for university course materials.',
+    longDescription: `An event-driven AI agent system built with LangGraph that automatically
+validates and processes uploaded course materials. Features OCR support,
+quality checks, and vector search powered by Qdrant.`,
+    tech: ['Python', 'LangGraph', 'LangChain', 'Qdrant', 'Docker', 'Docling'],
+    github: 'https://github.com/c4kar/ktunDepo',
     featured: false,
-    year: '2023',
+    year: '2025',
+    status: 'RUNNING',
+  },
+  {
+    id: 'PID-002',
+    title: 'Kukufi',
+    description: 'CLI tool that converts Arabic text to Kufi art style ASCII graphics.',
+    longDescription: `A Rust-based terminal application that renders Arabic text in traditional
+Kufi calligraphy style using ASCII characters. Features customizable styling
+and real-time rendering in the terminal.`,
+    tech: ['Rust', 'Crossterm', 'Serde', 'Clap'],
+    github: 'https://github.com/c4kar/Kukufi',
+    featured: true,
+    year: '2026',
     status: 'IDLE',
   },
   {
     id: 'PID-005',
-    title: 'Task Queue System',
-    description: 'Distributed task queue with priority scheduling and retry logic.',
-    longDescription: `A distributed task queue supporting priority-based scheduling,
-automatic retries with exponential backoff, and dead letter queues.`,
-    tech: ['Python', 'Redis', 'RabbitMQ', 'Docker'],
-    github: 'https://github.com/yourusername/task-queue',
+    title: ' jurnal (closed source)',
+    description: 'CLI journaling tool with AI-powered insights using different personas.',
+    longDescription: `A Python CLI application for daily journaling with AI analysis
+through multiple personas (stoic, socratic, default). Includes a memory
+system with 7 categories for contextual insights.`,
+    tech: ['Python', 'AI Agents', 'LangChain', 'CLI'],
     featured: false,
-    year: '2022',
+    year: '2026',
     status: 'IDLE',
   },
   {
     id: 'PID-006',
-    title: 'Developer Portfolio',
-    description: 'This site. Systems-dashboard inspired portfolio.',
-    longDescription: `A portfolio and blog site built with React, TypeScript, and Tailwind CSS.
-Features a systems-dashboard design, data-dense layouts, and markdown blog.`,
-    tech: ['React', 'TypeScript', 'Tailwind', 'Vite'],
-    github: 'https://github.com/yourusername/portfolio',
-    live: 'https://yourname.dev',
+    title: 'Violingo (closed source)',
+    description: 'Interactive Flutter app for learning violin with pitch detection.',
+    longDescription: `A mobile learning application built with Flutter and Flame game engine.
+Features real-time audio recording, pitch detection for practice feedback,
+and interactive lessons for violin students.`,
+    tech: ['Flutter', 'Dart', 'Flame', 'Flutter Sound', 'Pitch Detection'],
     featured: false,
-    year: '2024',
-    status: 'RUNNING',
+    year: '2025',
+    status: 'IDLE',
   },
 ];
 
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    id: 'post-1',
-    slug: 'building-cli-tools-in-rust',
-    title: 'Building CLI Tools in Rust',
-    excerpt: 'Why Rust is my go-to for command-line tooling and how to structure a CLI project.',
-    content: `## Why Rust for CLI tools?
-
-Rust gives you native performance, excellent error handling with Result types, and a rich ecosystem of CLI libraries like clap and dialoguer.
-
-### Getting started
-
-Start with \`cargo init\` and add clap for argument parsing:
-
-\`\`\`rust
-use clap::Parser;
-
-#[derive(Parser)]
-struct Cli {
-    pattern: String,
-    path: std::path::PathBuf,
-}
-\`\`\`
-
-### Error handling
-
-Use \`anyhow\` for application-level errors and \`thiserror\` for library errors. This gives you clean error propagation with the \`?\` operator.
-
-### Distribution
-
-Cross-compile with \`cross\` and distribute via GitHub Releases. Add a Homebrew formula for macOS users and a shell script installer for Linux.
-
-The key insight: CLI tools should be fast, predictable, and respect unix conventions. Rust makes all three natural.`,
-    date: '2024-12-15',
-    tags: ['Rust', 'CLI', 'DevTools'],
-    readTime: '5 min',
-  },
-  {
-    id: 'post-2',
-    slug: 'designing-for-developer-experience',
-    title: 'Designing for Developer Experience',
-    excerpt: 'Lessons learned from building tools that developers actually want to use.',
-    content: `## The DX pyramid
-
-Good developer experience has layers:
-
-- **It works** - Correctness first
-- **It's fast** - Nobody likes waiting
-- **It's intuitive** - Good defaults, clear errors
-- **It's delightful** - The small touches that make you smile
-
-### Error messages matter
-
-The difference between a frustrating tool and a great one is often the error messages. Compare:
-
-\`\`\`
-Error: ENOENT
-\`\`\`
-
-vs.
-
-\`\`\`
-Error: Config file not found at ~/.config/tool/config.yaml
-  hint: Run 'tool init' to create a default config
-\`\`\`
-
-### Convention over configuration
-
-Sensible defaults reduce cognitive load. Let users override when they need to, but make the common case require zero config.
-
-### Fast feedback loops
-
-Every millisecond counts. Hot reload, incremental builds, and instant previews keep developers in flow state.`,
-    date: '2024-11-28',
-    tags: ['DX', 'Design', 'Eng'],
-    readTime: '4 min',
-  },
-  {
-    id: 'post-3',
-    slug: 'system-design-lessons',
-    title: 'System Design Lessons from Production',
-    excerpt: 'Hard-won lessons from building and operating distributed systems at scale.',
-    content: `## Things I learned the hard way
-
-### 1. Start with the failure modes
-
-Before writing any code, enumerate how your system can fail. Then design for those failures. Every distributed system will encounter:
-
-- Network partitions
-- Clock skew
-- Partial failures
-- Cascading failures
-
-### 2. Observability is not optional
-
-You can't fix what you can't see. From day one, instrument:
-
-- Request latency (p50, p95, p99)
-- Error rates by type
-- Queue depths
-- Resource utilization
-
-### 3. Idempotency saves lives
-
-Make operations idempotent wherever possible. Retries are inevitable - your system should handle them gracefully.
-
-### 4. The database is the bottleneck
-
-It almost always is. Connection pooling, read replicas, and caching strategies should be planned early, not bolted on.
-
-### 5. Simple > Clever
-
-The system that's easy to understand is the system that's easy to debug at 3am. Choose boring technology.`,
-    date: '2024-10-12',
-    tags: ['SysDesign', 'Distributed', 'Backend'],
-    readTime: '6 min',
-  },
-  {
-    id: 'post-4',
-    slug: 'terminal-driven-development',
-    title: 'Terminal-Driven Development',
-    excerpt: 'How living in the terminal made me a more productive engineer.',
-    content: `## The terminal is underrated
-
-Most developers use the terminal for git commands and that's about it. But the terminal is the most powerful interface you have.
-
-### My setup
-
-- **Shell**: zsh + starship prompt
-- **Editor**: Neovim with LSP
-- **Multiplexer**: tmux with custom keybindings
-- **File search**: fzf + ripgrep
-- **Git**: lazygit for visual, raw git for scripting
-
-### Why it works
-
-The terminal is composable. Small tools that do one thing well, piped together, solve complex problems. This is the Unix philosophy, and it scales.
-
-### Getting started
-
-Don't try to switch everything at once. Start with one tool - maybe fzf for fuzzy finding - and build from there. Muscle memory takes time.
-
-The goal isn't to look like a hacker. It's to reduce the friction between thinking and doing.`,
-    date: '2024-09-05',
-    tags: ['Terminal', 'Productivity', 'DevTools'],
-    readTime: '4 min',
-  },
-];
+// ─── Blog Posts ───
+// Blog posts are now loaded dynamically from MDX files in /src/content/blog/
+// Use loadBlogPosts() from './blogLoader' to access all blog posts
+// To add a new blog post, create a new .mdx file in /src/content/blog/
 

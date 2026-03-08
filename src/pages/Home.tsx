@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
-import { SITE_CONFIG, PROJECTS, BLOG_POSTS, STATS } from '@/lib/data';
+import { SITE_CONFIG, PROJECTS, STATS } from '@/lib/data';
 import { StatusDot } from '@/components/ui';
+import { loadBlogPosts } from '@/lib/blogLoader';
 
 export default function Home() {
   const featuredProjects = PROJECTS.filter((p) => p.featured).slice(0, 4);
-  const latestPosts = BLOG_POSTS.slice(0, 3);
+  const latestPosts = loadBlogPosts().slice(0, 3);
 
   return (
     <div>
       {/* ── NEOFETCH ── */}
-      <section className="mb-8">
+      <section className="mb-5">
         <div className="font-mono text-xs text-text-muted mb-4 select-none">
           <span className="text-terminal-dim-green">system</span>
           <span>@</span>
@@ -18,32 +19,22 @@ export default function Home() {
           <span className="text-text-secondary">neofetch</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-4">
           {/* Left: identity */}
           <div>
-            <pre className="text-terminal-green text-xs leading-tight mb-4 select-none">{`
-  ███████████████████████████  
-  ███████████████████████████  
-                               
-                               
-  ████████████   █████   ████  
-  ████████████   █████   ████  
-          ████   █████   ████  
-          ████   █████   ████  
-  ████████████   █████   ████  
-  ████████████   █████   ████  
-  ████    ████   █████   ████  
-  ████    ████   █████   ████  
-  ███████████████████████████  
-  ███████████████████████████  
-`.trimStart()}</pre>
-            <h1 className="text-3xl font-bold text-text-primary mb-1">
+            <pre className="text-terminal-green text-xs leading-tight mb-4 select-none">{`                    ,--,
+              _ ___/ /\\|
+            ;( )__, )
+           ; //   '--;
+             \\     |
+              ^    ^`}</pre>
+            <h1 className="text-4xl font-bold text-text-primary mb-1">
               {SITE_CONFIG.name}
             </h1>
-            <p className="text-sm text-terminal-green mb-1">
+            <p className="text-base text-terminal-green mb-1">
               {SITE_CONFIG.tagline}
             </p>
-            <p className="text-sm text-text-secondary">
+            <p className="text-base text-text-secondary">
               {SITE_CONFIG.title} · {SITE_CONFIG.location}
             </p>
           </div>
@@ -72,7 +63,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-6 flex gap-4 text-sm">
+        <div className="mt-4 flex gap-4 text-base">
           <Link
             to="/projects"
             className="text-terminal-green hover:text-terminal-bright-green transition-colors"
@@ -131,21 +122,21 @@ export default function Home() {
         </div>
         <Link
           to="/projects"
-          className="text-xs text-text-muted hover:text-terminal-dim-green mt-3 inline-block transition-colors"
+          className="text-sm text-text-muted hover:text-terminal-dim-green mt-2 inline-block transition-colors"
         >
           → view all processes
         </Link>
       </section>
 
       {/* ── LATEST BLOG (journalctl) ── */}
-      <section className="mt-6">
+      <section className="mt-3">
         <div className="section-rule">journal</div>
         <div className="space-y-0">
           {latestPosts.map((post) => (
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}
-              className="block py-2 px-3 -mx-3 hover:bg-white/[0.02] transition-colors text-sm font-mono"
+              className="block py-2 px-3 -mx-3 hover:bg-white/[0.02] transition-colors text-base font-mono"
             >
               <span className="text-text-muted">{post.date}</span>
               <span className="text-terminal-dim-green mx-2">INFO</span>
@@ -159,14 +150,14 @@ export default function Home() {
         </div>
         <Link
           to="/blog"
-          className="text-xs text-text-muted hover:text-terminal-dim-green mt-3 inline-block transition-colors"
+          className="text-sm text-text-muted hover:text-terminal-dim-green mt-2 inline-block transition-colors"
         >
           → journalctl -f
         </Link>
       </section>
 
       {/* ── TOOLCHAIN ── */}
-      <section className="mt-6">
+      <section className="mt-3">
         <div className="section-rule">toolchain</div>
         <div className="flex flex-wrap gap-2">
           {SITE_CONFIG.skills.map((skill) => {
@@ -174,14 +165,14 @@ export default function Home() {
               skill.tag === 'DAILY DRIVER'
                 ? 'text-terminal-green border-terminal-green/30'
                 : skill.tag === 'PRODUCTION'
-                ? 'text-terminal-dim-green border-terminal-dim-green/30'
-                : skill.tag === 'LEARNING'
-                ? 'text-terminal-amber border-terminal-amber/30'
-                : 'text-terminal-cyan border-terminal-cyan/30';
+                  ? 'text-terminal-dim-green border-terminal-dim-green/30'
+                  : skill.tag === 'LEARNING'
+                    ? 'text-terminal-amber border-terminal-amber/30'
+                    : 'text-terminal-cyan border-terminal-cyan/30';
             return (
               <span
                 key={skill.name}
-                className={`text-xs border px-2 py-0.5 font-mono ${tagColor}`}
+                className={`text-sm border px-2 py-0.5 font-mono ${tagColor}`}
                 title={`${skill.tag} · ${skill.years}yr`}
               >
                 {skill.name}
@@ -189,7 +180,7 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="mt-2 flex gap-4 text-xs text-text-muted">
+        <div className="mt-2 flex gap-4 text-sm text-text-muted">
           <span><span className="text-terminal-green">■</span> daily driver</span>
           <span><span className="text-terminal-dim-green">■</span> production</span>
           <span><span className="text-terminal-amber">■</span> learning</span>
@@ -197,6 +188,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── FAVORITE TOOLS ── */}
+      <section className="mt-3">
+        <div className="section-rule">favorite tools</div>
+        <div className="flex flex-wrap gap-2">
+          {SITE_CONFIG.favoriteTools.map((tool) => {
+            const categoryColor =
+              tool.category === 'SYSTEM'
+                ? 'text-terminal-green border-terminal-green/30'
+                : tool.category === 'EDITOR'
+                  ? 'text-terminal-cyan border-terminal-cyan/30'
+                  : tool.category === 'BROWSER'
+                    ? 'text-terminal-amber border-terminal-amber/30'
+                    : tool.category === 'UTILITY'
+                      ? 'text-terminal-magenta border-terminal-magenta/30'
+                      : 'text-terminal-dim-green border-terminal-dim-green/30';
+            return (
+              <span
+                key={tool.name}
+                className={`text-sm border px-2 py-0.5 font-mono ${categoryColor}`}
+                title={tool.description || tool.name}
+              >
+                {tool.name}
+              </span>
+            );
+          })}
+        </div>
+        <div className="mt-2 flex gap-4 text-sm text-text-muted">
+          <span><span className="text-terminal-green">■</span> system</span>
+          <span><span className="text-terminal-cyan">■</span> editor</span>
+          <span><span className="text-terminal-amber">■</span> browser</span>
+          <span><span className="text-terminal-magenta">■</span> utility</span>
+          <span><span className="text-terminal-dim-green">■</span> terminal</span>
+        </div>
+      </section>
+
     </div>
   );
 }
+
+/*
+  ███████████████████████████  
+  ███████████████████████████  
+                               
+                               
+  ████████████   █████   ████  
+  ████████████   █████   ████  
+          ████   █████   ████  
+          ████   █████   ████  
+  ████████████   █████   ████  
+  ████████████   █████   ████  
+  ████    ████   █████   ████  
+  ████    ████   █████   ████  
+  ███████████████████████████  
+  ███████████████████████████  
+*/

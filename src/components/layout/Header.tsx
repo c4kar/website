@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { NAV_ITEMS, SITE_CONFIG } from '@/lib/data';
+import { NAV_ITEMS } from '@/lib/data';
 import clsx from 'clsx';
 
 export function Header() {
@@ -12,9 +12,9 @@ export function Header() {
         <div className="h-10 flex items-center justify-between text-xs font-mono">
           {/* Left: user@host */}
           <Link to="/" className="flex items-center gap-0 text-text-muted hover:text-text-secondary transition-colors">
-            <span className="text-terminal-dim-green">{SITE_CONFIG.name.toLowerCase().replace(/\s+/g, '')}</span>
+            <span className="text-terminal-dim-green">c4kar</span>
             <span className="text-text-muted">@</span>
-            <span className="text-terminal-amber">portfolio</span>
+            <span className="text-terminal-amber">portfoilo</span>
             <span className="text-text-muted ml-1.5">~</span>
           </Link>
 

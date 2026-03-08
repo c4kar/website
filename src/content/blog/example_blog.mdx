@@ -1,0 +1,70 @@
+---
+title: "Getting Started with MDX Blog System"
+date: "2024-01-15"
+tags: ["mdx", "react", "blog"]
+excerpt: "Learn how to create blog posts using MDX in this terminal-themed portfolio website"
+readTime: "5 min read"
+---
+
+# Getting Started with MDX Blog System
+
+Welcome to the new MDX-based blog system! This example post demonstrates how easy it is to create rich, interactive blog content.
+
+## What is MDX?
+
+MDX is a powerful format that lets you write **markdown** with embedded **React components**. This means you can:
+
+- Write content in familiar markdown syntax
+- Add interactive elements when needed
+- Keep your blog posts maintainable and version-controlled
+
+## Creating a New Post
+
+To create a new blog post, simply:
+
+1. Create a new `.mdx` file in `/src/content/blog/`
+2. Add YAML frontmatter with metadata
+3. Write your content in markdown
+4. Save the file - it will automatically appear on the blog!
+
+### Frontmatter Fields
+
+```yaml
+---
+title: "Your Post Title"
+date: "2024-01-15"
+tags: ["tag1", "tag2"]
+excerpt: "A brief description"
+readTime: "5 min read"
+---
+```
+
+## Code Examples
+
+You can include code blocks with syntax highlighting:
+
+```typescript
+interface BlogPost {
+  title: string;
+  date: string;
+  tags: string[];
+}
+
+const post: BlogPost = {
+  title: "My First MDX Post",
+  date: "2024-01-15",
+  tags: ["mdx", "react"]
+};
+```
+
+## Terminal Aesthetics
+
+This blog maintains the terminal-style aesthetic throughout:
+
+- Monospace fonts for that authentic CLI feel
+- Green accent colors reminiscent of classic terminals
+- Clean, distraction-free reading experience
+
+---
+
+**Happy blogging!** Just create a new `.mdx` file and start writing.

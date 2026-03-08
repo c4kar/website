@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { BLOG_POSTS } from '@/lib/data';
+import { loadBlogPosts } from '@/lib/blogLoader';
 
 export default function Blog() {
+  const posts = loadBlogPosts();
   return (
     <div>
       <div className="section-rule">journal</div>
@@ -11,7 +12,7 @@ export default function Blog() {
       </p>
 
       <div className="space-y-0">
-        {BLOG_POSTS.map((post) => (
+        {posts.map((post) => (
           <Link
             key={post.id}
             to={`/blog/${post.slug}`}
@@ -49,7 +50,7 @@ export default function Blog() {
       </div>
 
       <div className="mt-4 text-xs text-text-muted">
-        -- Journal entries: {BLOG_POSTS.length} --
+        -- Journal entries: {posts.length} --
       </div>
     </div>
   );

@@ -1,6 +1,23 @@
 import { SITE_CONFIG } from '@/lib/data';
+import { obfuscateEmail, reconstructEmail } from '@/lib/utils/email';
 
 export default function Contact() {
+  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const obfuscatedText = e.currentTarget.querySelector('span')?.textContent || '';
+    const email = reconstructEmail(obfuscatedText);
+    window.location.href = `mailto:${email}`;
+  };
+
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const obfuscatedText = e.currentTarget.querySelector('span')?.textContent || '';
+      const email = reconstructEmail(obfuscatedText);
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
   return (
     <div>
       <div className="section-rule">contact</div>
@@ -14,10 +31,15 @@ export default function Contact() {
           <div className="flex gap-3">
             <span className="text-terminal-amber w-20 shrink-0">EMAIL</span>
             <a
-              href={`mailto:${SITE_CONFIG.email}`}
-              className="text-terminal-green hover:text-terminal-bright-green transition-colors"
+              href="#"
+              onClick={handleEmailClick}
+              onKeyDown={handleEmailKeyDown}
+              className="text-terminal-green hover:text-terminal-bright-green transition-colors cursor-pointer"
+              role="button"
+              tabIndex={0}
+              aria-label="Click to reveal email address"
             >
-              {SITE_CONFIG.email}
+              <span dangerouslySetInnerHTML={{ __html: obfuscateEmail(SITE_CONFIG.email) }} />
             </a>
           </div>
           <div className="flex gap-3">
@@ -55,10 +77,16 @@ export default function Contact() {
       </p>
       <div className="mt-4">
         <a
-          href={`mailto:${SITE_CONFIG.email}`}
-          className="inline-flex items-center text-sm font-mono text-terminal-green border border-terminal-dim-green/40 bg-neutral-bg2 hover:border-terminal-green/60 hover:bg-neutral-bg3 px-4 py-2 transition-colors"
+          href="#"
+          onClick={handleEmailClick}
+          onKeyDown={handleEmailKeyDown}
+          className="inline-flex items-center text-sm font-mono text-terminal-green border border-terminal-dim-green/40 bg-neutral-bg2 hover:border-terminal-green/60 hover:bg-neutral-bg3 px-4 py-2 transition-colors cursor-pointer"
+          role="button"
+          tabIndex={0}
+          aria-label="Click to send email"
         >
-          mail -s "Hello" {SITE_CONFIG.email}
+          mail -s "Hello"{' '}
+          <span dangerouslySetInnerHTML={{ __html: obfuscateEmail(SITE_CONFIG.email) }} />
         </a>
       </div>
     </div>
