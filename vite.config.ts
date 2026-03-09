@@ -6,6 +6,7 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
 export default defineConfig({
+  base: '/website/',
   plugins: [
     { 
       enforce: 'pre', 
