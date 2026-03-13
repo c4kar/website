@@ -1,18 +1,23 @@
-import { type ReactNode } from 'react';
-import clsx from 'clsx';
+import { cn } from '@/lib/cn';
 
 interface BadgeProps {
-  children: ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    variant?: 'default' | 'secondary' | 'outline';
+    className?: string;
 }
 
-export const Badge = ({ children, className }: BadgeProps) => (
-  <span
-    className={clsx(
-      'font-mono text-xs text-terminal-cyan bg-terminal-cyan/8 border border-terminal-cyan/20 px-1.5 py-0.5',
-      className
-    )}
-  >
-    [{children}]
-  </span>
-);
+export function Badge({ children, variant = 'default', className }: BadgeProps) {
+    return (
+        <span
+            className={cn(
+                'inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium transition-colors',
+                variant === 'default' && 'bg-secondary text-secondary-foreground',
+                variant === 'secondary' && 'bg-muted text-muted-foreground',
+                variant === 'outline' && 'border border-border text-muted-foreground',
+                className,
+            )}
+        >
+            {children}
+        </span>
+    );
+}

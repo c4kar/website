@@ -1,7 +1,7 @@
 {
   "name": "portfolio-website",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,23 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mdx-js/rollup": "^3.1.1",
     "clsx": "^2.1.1",
     "geist": "^1.7.0",
+    "lucide-react": "^0.475.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.1",
-    "remark-frontmatter": "^5.0.0",
-    "remark-mdx-frontmatter": "^5.2.0"
+    "tailwind-merge": "^3.0.0"
   },
   "devDependencies": {
-    "@types/mdx": "^2.0.13",
     "@types/node": "^25.3.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.4",
     "autoprefixer": "^10.4.24",
-    "playwright": "^1.58.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3",

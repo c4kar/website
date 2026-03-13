@@ -1,64 +1,67 @@
-import type { ReactNode } from 'react';
-import clsx from 'clsx';
+import { cn } from '@/lib/cn';
 
-type ButtonVariant = 'primary' | 'ghost';
-type ButtonSize = 'sm' | 'md' | 'lg';
-
-interface ButtonProps {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  as?: 'button' | 'a';
-  href?: string;
-  className?: string;
-  children: ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: 'default' | 'outline' | 'ghost';
+    size?: 'default' | 'sm' | 'icon';
+    asChild?: boolean;
 }
 
-const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    'font-mono text-terminal-green border border-terminal-dim-green/40 bg-neutral-bg2 hover:border-terminal-green/60 hover:bg-neutral-bg3',
-  ghost:
-    'font-mono text-text-muted hover:text-text-primary hover:bg-white/[0.03]',
-};
-
-const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'text-xs px-2 py-1',
-  md: 'text-sm px-3 py-1.5',
-  lg: 'text-sm px-4 py-2',
-};
-
 export function Button({
-  variant = 'primary',
-  size = 'md',
-  as = 'button',
-  href,
-  className,
-  children,
-  onClick,
-  disabled,
-  type = 'button',
+    children,
+    variant = 'default',
+    size = 'default',
+    className,
+    ...props
 }: ButtonProps) {
-  const base = clsx(
-    'inline-flex items-center justify-center transition-colors duration-150',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-    variantStyles[variant],
-    sizeStyles[size],
-    className
-  );
-
-  if (as === 'a' && href) {
     return (
-      <a href={href} className={base}>
-        {children}
-      </a>
+        <button
+            className={cn(
+                'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                'disabled:pointer-events-none disabled:opacity-50',
+                variant === 'default' && 'bg-primary text-primary-foreground hover:bg-primary/90',
+                variant === 'outline' && 'border border-border bg-transparent hover:bg-accent hover:text-accent-foreground',
+                variant === 'ghost' && 'hover:bg-accent hover:text-accent-foreground',
+                size === 'default' && 'h-9 px-4 text-sm',
+                size === 'sm' && 'h-8 px-3 text-xs',
+                size === 'icon' && 'h-9 w-9',
+                className,
+            )}
+            {...props}
+        >
+            {children}
+        </button>
     );
-  }
+}
 
-  return (
-    <button type={type} className={base} disabled={disabled} onClick={onClick}>
-      {children}
-    </button>
-  );
+interface ButtonLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+    variant?: 'default' | 'outline' | 'ghost';
+    size?: 'default' | 'sm' | 'icon';
+}
+
+export function ButtonLink({
+    children,
+    variant = 'outline',
+    size = 'default',
+    className,
+    ...props
+}: ButtonLinkProps) {
+    return (
+        <a
+            className={cn(
+                'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                variant === 'default' && 'bg-primary text-primary-foreground hover:bg-primary/90',
+                variant === 'outline' && 'border border-border bg-transparent hover:bg-accent hover:text-accent-foreground',
+                variant === 'ghost' && 'hover:bg-accent hover:text-accent-foreground',
+                size === 'default' && 'h-9 px-4 text-sm',
+                size === 'sm' && 'h-8 px-3 text-xs',
+                size === 'icon' && 'h-9 w-9',
+                className,
+            )}
+            {...props}
+        >
+            {children}
+        </a>
+    );
 }
