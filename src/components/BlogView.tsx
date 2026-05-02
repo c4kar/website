@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getBlogPosts } from '@/lib/blog';
 import { BlogPost } from './BlogPost';
 
