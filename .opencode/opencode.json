@@ -1,0 +1,10 @@
+{
+  "permission": {
+    "read": {
+      "/home/c4kar/Code/portfoiloWebsite/.opencode/get-shit-done/*": "allow"
+    },
+    "external_directory": {
+      "/home/c4kar/Code/portfoiloWebsite/.opencode/get-shit-done/*": "allow"
+    }
+  }
+}

@@ -23,7 +23,6 @@ export const SITE_CONFIG = {
   location: 'Türkiye',
   skills: [
     { name: 'TypeScript', category: 'language' },
-    { name: 'TypeScript', category: 'language' },
     { name: 'Python', category: 'language' },
     { name: 'Rust', category: 'language' },
     { name: 'Dart', category: 'language' },

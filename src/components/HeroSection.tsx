@@ -4,7 +4,7 @@ import { ButtonLink } from '@/components/ui/Button';
 
 export function HeroSection() {
     return (
-        <div className="flex flex-col justify-center h-full py-10 pr-10">
+        <div className="flex flex-col justify-center py-8 lg:py-10 lg:pr-10 lg:h-full">
             <div className="mb-10">
                 <h1 className="text-4xl font-bold tracking-tight text-foreground mb-0.5">
                     {SITE_CONFIG.name}

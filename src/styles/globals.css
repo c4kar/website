@@ -10,6 +10,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist';
   src: url('/fonts/Geist-Medium.woff2') format('woff2');
@@ -17,6 +18,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist';
   src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
@@ -24,6 +26,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist';
   src: url('/fonts/Geist-Bold.woff2') format('woff2');
@@ -31,6 +34,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist Mono';
   src: url('/fonts/GeistMono-Regular.woff2') format('woff2');
@@ -38,6 +42,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist Mono';
   src: url('/fonts/GeistMono-Medium.woff2') format('woff2');
@@ -45,6 +50,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist Mono';
   src: url('/fonts/GeistMono-Bold.woff2') format('woff2');
@@ -90,7 +96,7 @@
   }
 
   #root {
-    @apply h-screen w-screen overflow-hidden flex items-center justify-center;
+    @apply min-h-screen w-full flex flex-col lg:h-screen lg:overflow-hidden lg:items-center lg:justify-center;
   }
 }
 
@@ -108,12 +114,15 @@
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;
 }
+
 .scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .scrollbar-thin::-webkit-scrollbar-thumb {
   @apply bg-muted rounded-full;
 }
+
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/40;
 }

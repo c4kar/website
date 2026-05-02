@@ -4,3 +4,5 @@ vite.log
 .DS_Store
 *.tsbuildinfo
 test-results/
+.hermes/
+.agents/
