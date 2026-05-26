@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn';
 
 export function ProjectsView() {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:h-full lg:min-h-0">
             <div className="lg:flex-1 lg:min-h-0 lg:overflow-y-auto scrollbar-thin lg:pr-1 space-y-4 pb-4">
                 {PROJECTS.map((project) => (
                     <Card key={project.id}>

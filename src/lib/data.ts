@@ -50,6 +50,33 @@ export const SITE_CONFIG = {
 
 export const PROJECTS: Project[] = [
   {
+    id: '007',
+    title: 'YourQuran',
+    description: 'An interactive web application to customize, preview, and generate print-ready, high-quality Qur\'an PDF digital editions.',
+    tech: ['Next.js', 'React', 'Zustand', 'Node.js', 'Puppeteer', 'PostgreSQL'],
+    github: 'https://github.com/c4kar/yourquran',
+    year: '2026',
+    status: 'active',
+  },
+  {
+    id: '008',
+    title: 'KaynakRapor',
+    description: 'A fast and lightweight news aggregation and summarization service that parses RSS feeds and generates automated AI summaries.',
+    tech: ['Go', 'PostgreSQL', 'RSS', 'LLM API'],
+    github: 'https://github.com/c4kar/kaynakRapor',
+    year: '2026',
+    status: 'active',
+  },
+  {
+    id: '009',
+    title: 'JURI Proje',
+    description: 'A high-performance, multi-language static portfolio website designed for an Istanbul-based interior architecture studio using a design-token CSS structure.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Design Tokens'],
+    github: 'https://github.com/c4kar/juriProjeWeb',
+    year: '2026',
+    status: 'active',
+  },
+  {
     id: '001',
     title: 'KTÜN Educational Material Network',
     description: 'Digital garden for university course notes with search and graph visualization.',
