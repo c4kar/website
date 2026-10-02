@@ -25,6 +25,7 @@ export const SITE_CONFIG = {
     { name: 'TypeScript', category: 'language' },
     { name: 'Python', category: 'language' },
     { name: 'Rust', category: 'language' },
+    { name: 'Go', category: 'language' },
     { name: 'Dart', category: 'language' },
     { name: 'Flutter', category: 'framework' },
     { name: 'n8n', category: 'tool' },
@@ -49,6 +50,41 @@ export const SITE_CONFIG = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: '010',
+    title: 'KufiReader',
+    description: 'Dual-directional geometric OCR and synthesis engine for Square Kufic calligraphy and monumental epigraphy.',
+    tech: ['Python', 'OpenCV', 'NumPy', 'Computer Vision', 'TDD'],
+    github: 'https://github.com/c4kar/KufiReader',
+    year: '2026',
+    status: 'active',
+  },
+  {
+    id: '011',
+    title: 'SahiBul',
+    description: 'Fast, stealth marketplace scraper and AI agent skill with headless sessions, in-memory DOM parsing, and market valuation.',
+    tech: ['Python', 'Playwright', 'Scrapling', 'SQLite', 'AI Agents'],
+    github: 'https://github.com/c4kar/sahibinden-skill',
+    year: '2026',
+    status: 'active',
+  },
+  {
+    id: '012',
+    title: 'KTÜN Ecosystem',
+    description: 'Unified campus automation platform integrating a Rust Telegram bot, Typst 0.15 academic PDF synthesis engine, and vector search.',
+    tech: ['Rust', 'Python', 'Typst', 'Qdrant', 'Docker Compose'],
+    year: '2026',
+    status: 'active',
+  },
+  {
+    id: '013',
+    title: 'ktunOto',
+    description: 'Desktop automation tool with AES encryption that automates university dining hall reservation and payment workflows.',
+    tech: ['Python', 'Selenium', 'AES Encryption', 'Automation'],
+    github: 'https://github.com/c4kar/ktunOto',
+    year: '2026',
+    status: 'active',
+  },
   {
     id: '007',
     title: 'YourQuran',
@@ -89,8 +125,8 @@ export const PROJECTS: Project[] = [
   {
     id: '002',
     title: 'KTÜN Student Bot',
-    description: 'Telegram bot providing class schedules, announcements, and cafeteria menus.',
-    tech: ['Python', 'Flask', 'Telegram API'],
+    description: 'Campus assistant Telegram bot providing class schedules, announcements, cafeteria menus, and exam tracking.',
+    tech: ['Rust', 'Teloxide', 'Telegram API'],
     github: 'https://github.com/c4kar/ktunBot',
     year: '2026',
     status: 'active',
